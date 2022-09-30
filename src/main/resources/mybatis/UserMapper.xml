@@ -6,18 +6,23 @@
 
     <select id="findById" resultType="com.deliveryfood.dto.UserDto">
         SELECT *
+            , USER_ID as userId
+            , IMAGE_PATH as imagePath
+            , REG_DT as regDt
+            , UDT_DT as udtDt
         FROM USER
-        WHERE email = #{email}
+        WHERE user_id = #{userId}
     </select>
 
     <insert id="register" parameterType="com.deliveryfood.dto.UserDto">
-        INSERT INTO USER(user_id, name , email, password, phone, address, status, reg_dt)
-        VALUES(#{userId}, #{name}, #{email}, #{password}, #{phone}, #{address}, #{status}, #{regDt})
+        INSERT INTO USER(user_id, address, nickname, grade, image_path, reg_dt)
+        VALUES(#{userId}, #{address}, #{nickname}, #{grade}, #{imagePath}, #{regDt})
     </insert>
 
-    <update id="withdraw" parameterType="com.deliveryfood.dto.UserDto">
+    <update id="updateUser" parameterType="com.deliveryfood.dto.UserDto">
         UPDATE USER
-        SET status = #{status},
+        SET address = #{address},
+            image_pass = #{imagePath}
             udt_dt = NOW()
         WHERE user_id = #{userId}
     </update>

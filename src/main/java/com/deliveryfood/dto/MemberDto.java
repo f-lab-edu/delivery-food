@@ -8,22 +8,28 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class MemberDto {
 
-    public enum Grade {
+    public enum Status {
         NONE,
-        COMMON,
-        VIP,
+        REGISTER_AUTH,
+        REGISTER,
+        WITHDRAW;
     }
 
     @NonNull
     private String userId;
     @NonNull
-    private String address;
-    private String nickname;
-    private Grade grade;
-    private String imagePath;
+    private String name;
     @NonNull
+    private String email;
+    @NonNull
+    private String password;
+    @NonNull
+    private String phone;
+    @NonNull
+    private Status status;
     private LocalDateTime regDt;
     private LocalDateTime udtDt;
+
 }

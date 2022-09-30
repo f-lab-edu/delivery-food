@@ -11,4 +11,6 @@ public class UserInput {
     private String password;
     private String phone;
     private String address;
+    private String nickname;
+    private String imagePath;
 }
