@@ -13,6 +13,15 @@
         WHERE email = #{email}
     </select>
 
+    <select id="findByUserId" resultType="com.deliveryfood.dto.MemberDto">
+        SELECT *
+             , USER_ID as userId
+             , REG_DT as regDt
+             , UDT_DT as udtDt
+        FROM MEMBER
+        WHERE user_id = #{userId}
+    </select>
+
     <insert id="register" parameterType="com.deliveryfood.dto.MemberDto">
         INSERT INTO MEMBER(user_id, name , email, password, phone, status, reg_dt)
         VALUES(#{userId}, #{name}, #{email}, #{password}, #{phone}, #{status}, #{regDt})

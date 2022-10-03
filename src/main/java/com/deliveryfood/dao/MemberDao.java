@@ -5,8 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
 @RequiredArgsConstructor
 public class MemberDao {
@@ -20,6 +18,10 @@ public class MemberDao {
 
     public MemberDto findByEmail(String email) {
         return sqlSessionTemplate.selectOne("com.deliveryfood.mapper.MemberMapper.findByEmail", email);
+    }
+
+    public MemberDto findByUserId(String userId) {
+        return sqlSessionTemplate.selectOne("com.deliveryfood.mapper.MemberMapper.findByUserId", userId);
     }
 
     public void updateStatus(MemberDto memberDto) {

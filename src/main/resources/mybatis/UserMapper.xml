@@ -4,7 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.deliveryfood.mapper.UserMapper">
 
-    <select id="findById" resultType="com.deliveryfood.dto.UserDto">
+    <select id="findByEmail" resultType="com.deliveryfood.dto.UserDto">
+        SELECT *
+             , USER_ID as userId
+             , IMAGE_PATH as imagePath
+             , REG_DT as regDt
+             , UDT_DT as udtDt
+        FROM USER
+        WHERE email = #{email}
+    </select>
+
+    <select id="findByUserId" resultType="com.deliveryfood.dto.UserDto">
         SELECT *
             , USER_ID as userId
             , IMAGE_PATH as imagePath
