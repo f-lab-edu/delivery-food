@@ -1,5 +1,6 @@
 package com.deliveryfood.service;
 
+import com.deliveryfood.Util.MemberSession;
 import com.deliveryfood.dao.MemberDao;
 import com.deliveryfood.dto.MemberDto;
 import com.deliveryfood.model.UserInput;
@@ -11,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.Collections;
 
@@ -20,7 +20,7 @@ import java.util.Collections;
 public class MemberService {
 
     private final MemberDao memberDao;
-    private final HttpSession session;
+    private final MemberSession session;
 
     public static final String REGISTER_CODE = "FLAB";
 
@@ -98,7 +98,7 @@ public class MemberService {
             return false;
         }
 
-        session.setAttribute("USER", memberDto.getUserId());
+        session.setLoginUserId(memberDto.getUserId());
         return true;
     }
 

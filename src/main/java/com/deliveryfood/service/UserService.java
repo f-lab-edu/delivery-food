@@ -1,5 +1,6 @@
 package com.deliveryfood.service;
 
+import com.deliveryfood.Util.MemberSession;
 import com.deliveryfood.dao.MemberDao;
 import com.deliveryfood.dao.UserDao;
 import com.deliveryfood.dto.UserDto;
@@ -9,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -17,10 +17,12 @@ import java.util.UUID;
 public class UserService extends MemberService implements IUserService {
 
     private final UserDao userDao;
+    private final MemberSession session;
 
-    public UserService(MemberDao memberDao, HttpSession httpSession, UserDao userDao) {
-        super(memberDao, httpSession);
+    public UserService(MemberDao memberDao, UserDao userDao, MemberSession session) {
+        super(memberDao, session);
         this.userDao = userDao;
+        this.session = session;
     }
 
     @Override
