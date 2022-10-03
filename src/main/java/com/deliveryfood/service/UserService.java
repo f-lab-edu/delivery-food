@@ -32,7 +32,7 @@ public class UserService extends MemberService implements IUserService {
             return false;
         }
 
-        UserDto userDto = userDao.findById(userRequest.getEmail());
+        UserDto userDto = userDao.findByEmail(userRequest.getEmail());
         if(userDto == null) {
             // 유저가 존재하지 않음
             return false;
@@ -49,7 +49,7 @@ public class UserService extends MemberService implements IUserService {
             return false;
         }
 
-        if(userDao.findById(uuid) != null) {
+        if(userDao.findByUserId(uuid) != null) {
             // 중복 유저 존재
             return false;
         }
@@ -74,7 +74,7 @@ public class UserService extends MemberService implements IUserService {
             return false;
         }
 
-        UserDto userDto = userDao.findById(userRequest.getEmail());
+        UserDto userDto = userDao.findByEmail(userRequest.getEmail());
         if(userDto == null) {
             // 유저가 존재하지 않음
             return false;
@@ -90,7 +90,7 @@ public class UserService extends MemberService implements IUserService {
 
     @Override
     public boolean modifyUser(UserInput userInput) {
-        UserDto userDto = userDao.findById(userInput.getEmail());
+        UserDto userDto = userDao.findByEmail(userInput.getEmail());
         if(userDto == null) {
             // 유저가 존재하지 않음
             return false;
@@ -105,7 +105,7 @@ public class UserService extends MemberService implements IUserService {
 
     @Override
     public UserDto findUser(String email) {
-        UserDto userDto = userDao.findById(email);
+        UserDto userDto = userDao.findByEmail(email);
         if(userDto == null) {
             // 유저가 존재하지 않음
             return null;

@@ -1,6 +1,5 @@
 package com.deliveryfood.dao;
 
-import com.deliveryfood.dto.MemberDto;
 import com.deliveryfood.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
