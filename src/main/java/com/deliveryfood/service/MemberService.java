@@ -3,6 +3,7 @@ package com.deliveryfood.service;
 import com.deliveryfood.Util.MemberSession;
 import com.deliveryfood.dao.MemberDao;
 import com.deliveryfood.dto.MemberDto;
+import com.deliveryfood.model.LoginResult;
 import com.deliveryfood.model.UserInput;
 import com.deliveryfood.model.UserRequest;
 import lombok.RequiredArgsConstructor;
@@ -24,15 +25,16 @@ public class MemberService {
 
     public static final String REGISTER_CODE = "FLAB";
 
-    public boolean certification(UserRequest userRequest, String code) {
-        MemberDto memberDto = memberDao.findByEmail(userRequest.getEmail());
-        if(memberDto == null) {
-            // 유저가 존재하지 않음
+    public boolean certification(String code) {
+        if(!code.equals(REGISTER_CODE)) {
+            // 인증 코드가 다름
             return false;
         }
 
-        if(!code.equals(REGISTER_CODE)) {
-            // 인증 코드가 다름
+        String userId = (String) session.getLoginUserId();
+        MemberDto memberDto = memberDao.findByUserId(userId);
+        if(memberDto == null) {
+            // 유저가 존재하지 않음
             return false;
         }
 
@@ -81,25 +83,25 @@ public class MemberService {
         return true;
     }
 
-    public boolean login(UserRequest userRequest) {
+    public LoginResult login(UserRequest userRequest) {
         MemberDto memberDto = memberDao.findByEmail(userRequest.getEmail());
         if(memberDto == null) {
             // 유저가 존재하지 않음
-            return false;
+            return LoginResult.NOT_EXIST_USER;
         }
 
         if(memberDto.getStatus().equals(MemberDto.Status.REGISTER_AUTH)) {
             // 본인 인증 완료 전
-            return false;
+            return LoginResult.NOT_REGISTER_AUTH;
         }
 
         if(!BCrypt.checkpw(userRequest.getPassword(), memberDto.getPassword())) {
             // 비밀번호가 다름
-            return false;
+            return LoginResult.NOT_MATCH_PASSWORD;
         }
 
         session.setLoginUserId(memberDto.getUserId());
-        return true;
+        return LoginResult.SUCCESS;
     }
 
     public boolean modifyUser(UserInput userInput) {
@@ -118,11 +120,6 @@ public class MemberService {
         MemberDto memberDto = memberDao.findByEmail(username);
         if(memberDto == null) {
             // 유저가 존재하지 않음
-            return null;
-        }
-
-        if(memberDto.getStatus().equals(MemberDto.Status.REGISTER_AUTH)) {
-            // 본인 인증 완료 전
             return null;
         }
 

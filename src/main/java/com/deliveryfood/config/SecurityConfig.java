@@ -28,12 +28,10 @@ public class SecurityConfig {
                 .antMatchers(
                         "/"
                         , "/users/register"
-                        , "/users/certification"
                 )
                 .permitAll();
 
         http.formLogin()
-                .loginProcessingUrl("/users/login")
                 .successHandler(authSuccessHandler)
                 .permitAll();
 

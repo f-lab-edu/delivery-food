@@ -4,6 +4,7 @@ import com.deliveryfood.Util.MemberSession;
 import com.deliveryfood.dao.MemberDao;
 import com.deliveryfood.dao.UserDao;
 import com.deliveryfood.dto.UserDto;
+import com.deliveryfood.model.LoginResult;
 import com.deliveryfood.model.UserInput;
 import com.deliveryfood.model.UserRequest;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,15 +27,15 @@ public class UserService extends MemberService implements IUserService {
     }
 
     @Override
-    public boolean certification(UserRequest userRequest, String code) {
+    public boolean certification(String code) {
         // REGISTER_CODE 와 일치하면 인증 완료
 
-        if(!super.certification(userRequest, code)) {
+        if(!super.certification(code)) {
             // 멤버 이슈가 있음
             return false;
         }
 
-        UserDto userDto = userDao.findByEmail(userRequest.getEmail());
+        UserDto userDto = userDao.findByUserId(session.getLoginUserId());
         if(userDto == null) {
             // 유저가 존재하지 않음
             return false;
@@ -86,7 +87,7 @@ public class UserService extends MemberService implements IUserService {
     }
 
     @Override
-    public boolean login(UserRequest userRequest) {
+    public LoginResult login(UserRequest userRequest) {
         return super.login(userRequest);
     }
 
