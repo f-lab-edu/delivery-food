@@ -11,11 +11,12 @@ import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,9 +29,16 @@ class UserControllerTest {
     @Autowired
     private UserController userController;
 
+    @Autowired
+    private FilterChainProxy filterChainProxy;
+
     @BeforeEach
     public void init() {
-        mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+
+        mockMvc = MockMvcBuilders
+                .standaloneSetup(userController)
+                .apply(springSecurity(filterChainProxy))
+                .build();
     }
 
     @Test
@@ -90,15 +98,14 @@ class UserControllerTest {
     @Test
     @DisplayName("회원 로그인을 한다.")
     public void testLogin() throws Exception {
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.set("userId", String.valueOf(ArgumentMatchers.anyInt()));
-        map.set("password", "testpassword");
+        UserRequest userRequest = UserRequest.builder()
+                .email("test@gmail.com")
+                .password("testpassword")
+                .build();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        mockMvc.perform(post("/users/login")
-                .characterEncoding("utf-8")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(map)))
+        mockMvc.perform(formLogin()
+                .user(userRequest.getEmail())
+                .password(userRequest.getPassword()))
                 .andExpect(status().isOk())
                 .andDo(print());
     }

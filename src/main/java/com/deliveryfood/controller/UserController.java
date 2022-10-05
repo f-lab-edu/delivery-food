@@ -6,6 +6,7 @@ import com.deliveryfood.model.UserInput;
 import com.deliveryfood.model.UserRequest;
 import com.deliveryfood.service.IUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,15 +42,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(HttpServletRequest request) {
+    public HttpStatus login(HttpServletRequest request) {
         // 로그인
         UserRequest userRequest = new UserRequest(request.getParameter("username"), request.getParameter("password"));
         LoginResult result = userService.login(userRequest);
         if(result.equals(LoginResult.NOT_REGISTER_AUTH)) {
-            return "redirect:/users/certification";
+            return HttpStatus.FOUND;
         }
 
-        return "";
+        return HttpStatus.OK;
     }
 
     @PostMapping("/logout")

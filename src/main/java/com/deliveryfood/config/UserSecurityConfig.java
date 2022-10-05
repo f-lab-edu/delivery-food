@@ -4,6 +4,7 @@ import com.deliveryfood.handler.AuthSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,10 +12,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+@Order(1)
 @RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig {
+public class UserSecurityConfig {
 
     private final AuthSuccessHandler authSuccessHandler;
 
@@ -32,6 +34,8 @@ public class SecurityConfig {
                 .permitAll();
 
         http.formLogin()
+                //.loginPage("/users/login")
+                //.loginProcessingUrl("/users/login")
                 .successHandler(authSuccessHandler)
                 .permitAll();
 

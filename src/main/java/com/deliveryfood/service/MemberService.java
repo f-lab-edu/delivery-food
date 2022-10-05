@@ -95,11 +95,6 @@ public class MemberService {
             return LoginResult.NOT_REGISTER_AUTH;
         }
 
-        if(!BCrypt.checkpw(userRequest.getPassword(), memberDto.getPassword())) {
-            // 비밀번호가 다름
-            return LoginResult.NOT_MATCH_PASSWORD;
-        }
-
         session.setLoginUserId(memberDto.getUserId());
         return LoginResult.SUCCESS;
     }
