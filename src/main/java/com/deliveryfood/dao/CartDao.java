@@ -33,4 +33,8 @@ public class CartDao {
         map.put("index", index);
         sqlSessionTemplate.delete("com.deliveryfood.mapper.CartMapper.deleteMenu", map);
     }
+
+    public void deleteAllCart() {
+        sqlSessionTemplate.insert("com.deliveryfood.mapper.CartMapper.deleteAllCart");
+    }
 }

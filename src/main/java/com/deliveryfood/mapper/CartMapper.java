@@ -16,4 +16,6 @@ public interface CartMapper {
     void addMenu(CartMenuDto cartMenuDto);
 
     void deleteMenu(Map<String, Object> map);
+
+    void deleteAllCart();
 }

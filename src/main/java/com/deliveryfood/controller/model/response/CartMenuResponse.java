@@ -14,7 +14,7 @@ public class CartMenuResponse {
 
     public static CartMenuResponse convert (CartMenuDto menuDto) {
         return CartMenuResponse.builder()
-                .index(menuDto.getIndex())
+                .index(menuDto.getIdx())
                 .menuId(menuDto.getMenuId())
                 .count(menuDto.getCount())
                 .build();

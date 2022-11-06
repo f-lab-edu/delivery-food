@@ -59,7 +59,7 @@ public class CartService implements ICartService {
 
         CartMenuDto cartMenuDto = CartMenuDto.builder()
                 .userId(menuVO.getUserId())
-                .index(menuVO.getIndex())
+                .idx(menuVO.getIdx())
                 .menuId(menuVO.getMenuId())
                 .count(menuVO.getCount())
                 .regDt(LocalDateTime.now())
@@ -93,7 +93,7 @@ public class CartService implements ICartService {
             throw new IndexOutOfBoundsException("장바구니 메뉴 인덱스 범위 오류 : " + index);
         }
 
-        if(cartList.stream().noneMatch(e -> Objects.equals(e.getIndex(), index))) {
+        if(cartList.stream().noneMatch(e -> Objects.equals(e.getIdx(), index))) {
             throw new RuntimeException("삭제할 장바구니 인덱스가 존재하지 않음 : " + index);
         }
 

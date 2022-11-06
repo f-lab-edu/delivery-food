@@ -17,7 +17,7 @@ public class CartMenuDto {
     @NonNull
     private String userId;
     @NonNull
-    private int index;
+    private int idx;
     @NonNull
     private int menuId;
     @NonNull

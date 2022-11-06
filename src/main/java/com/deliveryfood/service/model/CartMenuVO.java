@@ -13,14 +13,14 @@ import lombok.NoArgsConstructor;
 public class CartMenuVO {
 
     private String userId;
-    private int index;
+    private int idx;
     private int menuId;
     private int count;
 
     public static CartMenuVO convert(String userId, CartMenuRequest menuRequest) {
         return CartMenuVO.builder()
                 .userId(userId)
-                .index(menuRequest.getIndex())
+                .idx(menuRequest.getIdx())
                 .menuId(menuRequest.getMenuId())
                 .count(menuRequest.getCount())
                 .build();

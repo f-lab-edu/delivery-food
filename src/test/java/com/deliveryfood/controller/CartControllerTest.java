@@ -1,8 +1,12 @@
 package com.deliveryfood.controller;
 
 import com.deliveryfood.common.mock.auth.WithAuthMember;
-import com.deliveryfood.controller.model.request.CartMenuRequest;
+import com.deliveryfood.dao.CartDao;
+import com.deliveryfood.dao.MemberDao;
+import com.deliveryfood.dao.UserDao;
+import com.deliveryfood.model.request.CartMenuRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,6 +34,15 @@ class CartControllerTest {
     @Autowired
     private CartController cartController;
 
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private MemberDao memberDao;
+
+    @Autowired
+    private CartDao cartDao;
+
     @BeforeEach
     public void init() {
         mockMvc = MockMvcBuilders
@@ -37,6 +50,13 @@ class CartControllerTest {
                 .defaultRequest(get("/").with(testSecurityContext()))
                 .addFilters(springSecurityFilterChain)
                 .build();
+    }
+
+    @AfterEach
+    public void clear() {
+        memberDao.deleteAllMember();
+        userDao.deleteAllUser();
+        cartDao.deleteAllCart();
     }
 
     @Test
@@ -51,6 +71,13 @@ class CartControllerTest {
     @DisplayName("userId 로부터 장바구니를 삭제한다.")
     @WithAuthMember(username = "test@gmail.com", password = "test1234", authority = "ROLE_USER,ROLE_AUTH")
     public void testDeleteCart() throws Exception {
+        CartMenuRequest menuRequest = CartMenuRequest.builder()
+                .idx(1)
+                .menuId(1001)
+                .count(1)
+                .build();
+        cartController.addMenu(menuRequest);
+
         mockMvc.perform(delete("/carts"))
                 .andExpect(status().isOk());
     }
@@ -60,7 +87,7 @@ class CartControllerTest {
     @WithAuthMember(username = "test@gmail.com", password = "test1234", authority = "ROLE_USER,ROLE_AUTH")
     public void testAddMenu() throws Exception {
         CartMenuRequest menuRequest = CartMenuRequest.builder()
-                .index(1)
+                .idx(1)
                 .menuId(1001)
                 .count(1)
                 .build();
@@ -78,6 +105,13 @@ class CartControllerTest {
     @DisplayName("index로부터 장바구니에 매뉴를 삭제한다.")
     @WithAuthMember(username = "test@gmail.com", password = "test1234", authority = "ROLE_USER,ROLE_AUTH")
     public void testDeleteMenu() throws Exception {
+        CartMenuRequest menuRequest = CartMenuRequest.builder()
+                .idx(1)
+                .menuId(1001)
+                .count(1)
+                .build();
+        cartController.addMenu(menuRequest);
+
         int index = 1;
         mockMvc.perform(post("/carts/sub/" + index))
                 .andExpect(status().isOk());

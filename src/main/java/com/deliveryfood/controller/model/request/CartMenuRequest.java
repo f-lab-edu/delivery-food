@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class CartMenuRequest {
 
-    private int index;
+    private int idx;
     private int menuId;
     private int count;
 }
