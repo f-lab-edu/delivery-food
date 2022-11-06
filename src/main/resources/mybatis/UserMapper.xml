@@ -28,5 +28,8 @@
         WHERE user_id = #{userId}
     </update>
 
+    <delete id="deleteAllUser">
+        DELETE FROM USER
+    </delete>
 
 </mapper>

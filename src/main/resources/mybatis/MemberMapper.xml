@@ -41,12 +41,15 @@
         WHERE user_id = #{userId}
     </update>
 
-    <update id="updateUser" parameterType="com.deliveryfood.dto.MemberDto">
+    <update id="updateMember" parameterType="com.deliveryfood.dto.MemberDto">
         UPDATE MEMBER
         SET phone = #{phone},
             udt_dt = NOW()
         WHERE user_id = #{userId}
     </update>
 
+    <delete id="deleteAllMember">
+        DELETE FROM MEMBER
+    </delete>
 
 </mapper>

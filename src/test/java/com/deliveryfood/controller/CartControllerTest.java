@@ -41,7 +41,7 @@ class CartControllerTest {
 
     @Test
     @DisplayName("userId 로부터 장바구니를 조회한다.")
-    @WithAuthMember(username = "test@gmail.com", authority = "ROLE_USER,ROLE_AUTH")
+    @WithAuthMember(username = "test@gmail.com", password = "test1234", authority = "ROLE_USER,ROLE_AUTH")
     public void testFindCart() throws Exception {
         mockMvc.perform(get("/carts"))
                 .andExpect(status().isOk());
@@ -49,7 +49,7 @@ class CartControllerTest {
 
     @Test
     @DisplayName("userId 로부터 장바구니를 삭제한다.")
-    @WithAuthMember(username = "test@gmail.com", authority = "ROLE_USER,ROLE_AUTH")
+    @WithAuthMember(username = "test@gmail.com", password = "test1234", authority = "ROLE_USER,ROLE_AUTH")
     public void testDeleteCart() throws Exception {
         mockMvc.perform(delete("/carts"))
                 .andExpect(status().isOk());
@@ -57,7 +57,7 @@ class CartControllerTest {
 
     @Test
     @DisplayName("menuId를 사용해서 장바구니에 메뉴를 추가한다.")
-    @WithAuthMember(username = "test@gmail.com", authority = "ROLE_USER,ROLE_AUTH")
+    @WithAuthMember(username = "test@gmail.com", password = "test1234", authority = "ROLE_USER,ROLE_AUTH")
     public void testAddMenu() throws Exception {
         CartMenuRequest menuRequest = CartMenuRequest.builder()
                 .index(1)
@@ -76,7 +76,7 @@ class CartControllerTest {
 
     @Test
     @DisplayName("index로부터 장바구니에 매뉴를 삭제한다.")
-    @WithAuthMember(username = "test@gmail.com", authority = "ROLE_USER,ROLE_AUTH")
+    @WithAuthMember(username = "test@gmail.com", password = "test1234", authority = "ROLE_USER,ROLE_AUTH")
     public void testDeleteMenu() throws Exception {
         int index = 1;
         mockMvc.perform(post("/carts/sub/" + index))

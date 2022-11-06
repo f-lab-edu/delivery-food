@@ -16,5 +16,7 @@ public interface MemberMapper {
 
     void updateRole(MemberDto userDto);
 
-    void updateUser(MemberDto userDto);
+    void updateMember(MemberDto userDto);
+
+    void deleteAllMember();
 }

@@ -11,4 +11,6 @@ public interface UserMapper {
     UserDto findByUserId(String email);
 
     void updateUser(UserDto userDto);
+
+    void deleteAllUser();
 }

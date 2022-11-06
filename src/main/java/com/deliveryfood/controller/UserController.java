@@ -8,8 +8,6 @@ import com.deliveryfood.util.SecurityPrincipal;
 import com.deliveryfood.service.model.UserRegisterVO;
 import com.deliveryfood.service.model.UserUpdateVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,9 +50,4 @@ public class UserController {
         UserUpdateVO updateVO = UserUpdateVO.convert(updateRequest);
         userService.modifyUser(userId, updateVO);
    }
-
-    @GetMapping("/{userId}/orders")
-    public void findOrderByUserId(@PathVariable String userId) {
-        // 유저의 모든 주문을 조회
-    }
 }

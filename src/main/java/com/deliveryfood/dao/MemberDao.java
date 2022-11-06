@@ -32,7 +32,11 @@ public class MemberDao {
         sqlSessionTemplate.update("com.deliveryfood.mapper.MemberMapper.updateRole", memberDto);
     }
 
-    public void updateUser(MemberDto memberDto) {
+    public void updateMember(MemberDto memberDto) {
         sqlSessionTemplate.update("com.deliveryfood.mapper.MemberMapper.updateUser", memberDto);
+    }
+
+    public void deleteAllMember() {
+        sqlSessionTemplate.delete("com.deliveryfood.mapper.MemberMapper.deleteAllMember");
     }
 }

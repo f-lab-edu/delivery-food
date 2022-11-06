@@ -9,5 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 @WithSecurityContext(factory = WithAuthMemberSecurityContextFactory.class)
 public @interface WithAuthMember {
     String username();
+    String password();
     String authority();
 }
