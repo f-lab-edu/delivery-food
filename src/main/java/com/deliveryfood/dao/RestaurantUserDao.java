@@ -16,11 +16,11 @@ public class RestaurantUserDao {
         return true;
     }
 
-    public RestaurantUserDto findByEmail(String email) {
-        return sqlSessionTemplate.selectOne("com.deliveryfood.mapper.RestaurantUserMapper.findByEmail", email);
-    }
-
     public RestaurantUserDto findByUserId(String userId) {
         return sqlSessionTemplate.selectOne("com.deliveryfood.mapper.RestaurantUserMapper.findByUserId", userId);
+    }
+
+    public void deleteAllRestaurantUser() {
+        sqlSessionTemplate.delete("com.deliveryfood.mapper.RestaurantUserMapper.deleteAllRestaurantUser");
     }
 }

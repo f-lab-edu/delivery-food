@@ -2,16 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.deliveryfood.mapper.RestaurantMapper">
-
-    <select id="findByEmail" resultType="com.deliveryfood.dto.RestaurantUserDto">
-        SELECT *
-             , USER_ID as userId
-             , REG_DT as regDt
-             , UDT_DT as udtDt
-        FROM RESTAURANT_USER
-        WHERE email = #{email}
-    </select>
+<mapper namespace="com.deliveryfood.mapper.RestaurantUserMapper">
 
     <select id="findByUserId" resultType="com.deliveryfood.dto.RestaurantUserDto">
         SELECT *
@@ -24,7 +15,11 @@
 
     <insert id="register" parameterType="com.deliveryfood.dto.RestaurantUserDto">
         INSERT INTO RESTAURANT_USER(user_id, reg_dt, udt_dt)
-        VALUES(#{userId}, #{regDt}, #{udt_dt})
+        VALUES(#{userId}, #{regDt}, #{udtDt})
     </insert>
+
+    <delete id="deleteAllRestaurantUser">
+        DELETE FROM RESTAURANT_USER
+    </delete>
 
 </mapper>

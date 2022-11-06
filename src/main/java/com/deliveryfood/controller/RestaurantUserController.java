@@ -1,12 +1,11 @@
 package com.deliveryfood.controller;
 
-import com.deliveryfood.security.CustomUserDetails;
-import com.deliveryfood.controller.model.request.RestaurantUserRegisterRequest;
-import com.deliveryfood.controller.model.request.UserRequest;
+import com.deliveryfood.model.request.RestaurantUserRegisterRequest;
+import com.deliveryfood.model.request.UserRequest;
 import com.deliveryfood.service.IRestaurantUserService;
-import com.deliveryfood.service.model.RestaurantUserRegisterVO;
+import com.deliveryfood.util.SecurityPrincipal;
+import com.deliveryfood.vo.RestaurantUserRegisterVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +20,10 @@ public class RestaurantUserController {
     private final IRestaurantUserService restaurantUserService;
 
     @PostMapping("/certification")
-    public void certification(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestParam String code) {
+    public void certification(@RequestParam String code) {
         // 입력한 코드로 본인 인증
-        restaurantUserService.certification(userDetails.getUsername(), code);
+        String userId = SecurityPrincipal.getLoginUserId();
+        restaurantUserService.certification(userId, code);
     }
 
     @PostMapping("/register")
@@ -36,6 +36,7 @@ public class RestaurantUserController {
     @PostMapping("/withdraw")
     public void withdraw(@RequestBody UserRequest userRequest) {
         // 레스토랑 회원 탈퇴 (session을 삭제할 뿐 정보의 변경은 없다.)
-        restaurantUserService.withdraw(userRequest);
+        String userId = SecurityPrincipal.getLoginUserId();
+        restaurantUserService.withdraw(userId, userRequest);
     }
 }

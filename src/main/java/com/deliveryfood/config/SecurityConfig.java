@@ -36,8 +36,8 @@ public class SecurityConfig {
                         , "/users/certification"
                         , "/riders/register"
                         , "/riders/certification"
-                        , "/restaurants/register"
-                        , "/restaurants/certification"
+                        , "/restaurants/user/register"
+                        , "/restaurants/user/certification"
                 )
                 .permitAll()
                 .antMatchers("/users/**", "/carts/**")
