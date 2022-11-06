@@ -1,11 +1,14 @@
 package com.deliveryfood.controller;
 
 import com.deliveryfood.common.mock.auth.WithAuthMember;
-import com.deliveryfood.controller.model.request.RiderRegisterRequest;
-import com.deliveryfood.controller.model.request.RiderUpdateRequest;
-import com.deliveryfood.controller.model.request.UserRequest;
-import com.deliveryfood.service.impl.MemberService;
+import com.deliveryfood.dao.MemberDao;
+import com.deliveryfood.dao.RiderDao;
+import com.deliveryfood.model.request.RiderRegisterRequest;
+import com.deliveryfood.model.request.RiderUpdateRequest;
+import com.deliveryfood.model.request.UserRequest;
+import com.deliveryfood.service.MemberService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,6 +38,12 @@ public class RiderControllerTest {
     @Autowired
     private RiderController riderController;
 
+    @Autowired
+    private RiderDao riderDao;
+
+    @Autowired
+    private MemberDao memberDao;
+
     @BeforeEach
     public void init() {
         mockMvc = MockMvcBuilders
@@ -42,6 +51,12 @@ public class RiderControllerTest {
                 .defaultRequest(get("/").with(testSecurityContext()))
                 .addFilters(springSecurityFilterChain)
                 .build();
+    }
+
+    @AfterEach
+    public void clear() {
+        memberDao.deleteAllMember();
+        riderDao.deleteAllRider();
     }
 
     @Test
@@ -59,8 +74,8 @@ public class RiderControllerTest {
     @DisplayName("라이더 회원 가입을 한다")
     public void testRegister() throws Exception {
         RiderRegisterRequest registerRequest = RiderRegisterRequest.builder()
-                .name("라이더")
-                .email("rider@gmail.com")
+                .name("라이더123")
+                .email("rider123@gmail.com")
                 .password("riderpassword")
                 .phone("010-1234-5678")
                 .commission(3000)
@@ -81,7 +96,7 @@ public class RiderControllerTest {
     public void testWithdraw() throws Exception {
         UserRequest userRequest = UserRequest.builder()
                 .email("rider@gmail.com")
-                .password("riderpassword")
+                .password("test1234")
                 .build();
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -99,7 +114,7 @@ public class RiderControllerTest {
     public void testLogin() throws Exception {
         UserRequest userRequest = UserRequest.builder()
                 .email("rider@gmail.com")
-                .password("riderpassword")
+                .password("test1234")
                 .build();
 
         mockMvc.perform(formLogin()

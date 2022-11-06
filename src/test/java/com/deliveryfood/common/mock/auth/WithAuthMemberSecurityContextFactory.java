@@ -1,9 +1,12 @@
 package com.deliveryfood.common.mock.auth;
 
 import com.deliveryfood.model.CustomUserDetails;
+import com.deliveryfood.model.request.RiderRegisterRequest;
 import com.deliveryfood.model.request.UserRegisterRequest;
 import com.deliveryfood.service.IMemberService;
+import com.deliveryfood.service.IRiderService;
 import com.deliveryfood.service.IUserService;
+import com.deliveryfood.vo.RiderRegisterVO;
 import com.deliveryfood.vo.UserRegisterVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +24,7 @@ public class WithAuthMemberSecurityContextFactory implements WithSecurityContext
 
     private final IMemberService memberService;
     private final IUserService userService;
+    private final IRiderService riderService;
 
     @Override
     public SecurityContext createSecurityContext(WithAuthMember annotation) {
@@ -38,6 +42,16 @@ public class WithAuthMemberSecurityContextFactory implements WithSecurityContext
                     .build();
 
             userService.register(UserRegisterVO.convert(registerRequest));
+        } else if(authority.contains("ROLE_RIDER")) {
+            RiderRegisterRequest registerRequest = RiderRegisterRequest.builder()
+                    .name(username)
+                    .email(username)
+                    .password(password)
+                    .phone("010-1234-5678")
+                    .commission(3000)
+                    .build();
+
+            riderService.register(RiderRegisterVO.convert(registerRequest));
         }
 
         CustomUserDetails user = (CustomUserDetails) memberService.loadUserByUsername(username);

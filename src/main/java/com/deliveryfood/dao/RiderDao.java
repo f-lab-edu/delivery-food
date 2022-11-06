@@ -27,4 +27,8 @@ public class RiderDao {
     public void updateStatus(RiderDto riderDto) {
         sqlSessionTemplate.update("com.deliveryfood.mapper.RiderMapper.updateStatus", riderDto);
     }
+
+    public void deleteAllRider() {
+        sqlSessionTemplate.delete("com.deliveryfood.mapper.RiderMapper.deleteAllRider");
+    }
 }

@@ -31,4 +31,9 @@
             udt_dt = NOW()
         WHERE user_id = #{userId}
     </update>
+
+    <delete id="deleteAllRider">
+        DELETE FROM RIDER
+    </delete>
+
 </mapper>

@@ -13,4 +13,6 @@ public interface RiderMapper {
     void updateRider(RiderDto riderDto);
 
     void updateStatus(RiderDto riderDto);
+
+    void delteAllRider();
 }
