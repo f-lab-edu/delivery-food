@@ -9,7 +9,7 @@ create table MEMBER
     PHONE    VARCHAR(255),
     STATUS   VARCHAR(255),
     ROLE     VARCHAR(255),
-    REG_DT   TIMESTAMP,
-    UDT_DT   TIMESTAMP,
+    REG_DT   DATETIME,
+    UDT_DT   DATETIME,
     primary key (USER_ID)
 );

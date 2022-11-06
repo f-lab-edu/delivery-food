@@ -6,7 +6,7 @@ create table CART
     INDEX   INT          not null,
     MENU_ID INT,
     COUNT   INT,
-    REG_DT  TIMESTAMP,
-    UDT_DT  TIMESTAMP,
+    REG_DT  DATETIME,
+    UDT_DT  DATETIME,
     primary key (USER_ID, INDEX)
 );

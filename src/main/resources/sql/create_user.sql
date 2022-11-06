@@ -7,7 +7,7 @@ create table USER
     NICKNAME   VARCHAR(255),
     GRADE      VARCHAR(255),
     IMAGE_PATH VARCHAR(255),
-    REG_DT     TIMESTAMP,
-    UDT_DT     TIMESTAMP,
+    REG_DT     DATETIME,
+    UDT_DT     DATETIME,
     primary key (USER_ID)
 );
