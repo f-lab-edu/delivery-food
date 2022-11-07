@@ -1,8 +1,8 @@
 package com.deliveryfood.service;
 
-import com.deliveryfood.model.request.UserRequest;
-import com.deliveryfood.vo.RiderRegisterVO;
-import com.deliveryfood.vo.RiderUpdateVO;
+import com.deliveryfood.controller.model.request.UserRequest;
+import com.deliveryfood.service.model.RiderRegisterVO;
+import com.deliveryfood.service.model.RiderUpdateVO;
 
 public interface IRiderService {
 

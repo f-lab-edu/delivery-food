@@ -20,7 +20,7 @@
         WHERE menu_id = #{menuId}
     </select>
 
-    <resultMap id="OptionInfo" type="com.deliveryfood.model.OptionInput">
+    <resultMap id="OptionInfo" type="com.deliveryfood.controller.model.request.OptionRequest">
         <result column="option_id" property="optionId"/>
         <result column="menu_id" property="menuId"/>
         <result column="name" property="name"/>

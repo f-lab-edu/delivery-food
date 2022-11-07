@@ -1,13 +1,12 @@
 package com.deliveryfood.service;
 
-import com.deliveryfood.dto.SubOptionDto;
-import com.deliveryfood.model.SubOptionInput;
+import com.deliveryfood.controller.model.request.SubOptionRequest;
 
 import java.util.List;
 
 public interface ISubOptionService {
 
-    void createSubOption(SubOptionInput subOptionInput);
-    void deleteSubOptionById(SubOptionInput subOptionInput);
-    List<SubOptionInput> findSubOptionById(SubOptionInput subOptionInput);
+    void createSubOption(SubOptionRequest subOptionRequest);
+    void deleteSubOptionById(SubOptionRequest subOptionRequest);
+    List<SubOptionRequest> findSubOptionById(SubOptionRequest subOptionRequest);
 }

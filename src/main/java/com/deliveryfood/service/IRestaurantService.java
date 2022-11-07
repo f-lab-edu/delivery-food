@@ -1,7 +1,7 @@
 package com.deliveryfood.service;
 
 import com.deliveryfood.dto.RestaurantDto;
-import com.deliveryfood.vo.RestaurantRegisterVO;
+import com.deliveryfood.service.model.RestaurantRegisterVO;
 
 import java.util.List;
 

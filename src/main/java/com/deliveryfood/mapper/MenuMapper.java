@@ -2,7 +2,6 @@ package com.deliveryfood.mapper;
 
 
 import com.deliveryfood.dto.MenuDto;
-import com.deliveryfood.model.MenuInput;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

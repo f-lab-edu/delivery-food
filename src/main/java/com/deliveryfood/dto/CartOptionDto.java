@@ -1,6 +1,6 @@
 package com.deliveryfood.dto;
 
-import com.deliveryfood.vo.CartOptionVO;
+import com.deliveryfood.service.model.CartOptionVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.deliveryfood.service;
 
-import com.deliveryfood.model.request.UserRequest;
-import com.deliveryfood.vo.RestaurantUserRegisterVO;
+import com.deliveryfood.controller.model.request.UserRequest;
+import com.deliveryfood.service.model.RestaurantUserRegisterVO;
 
 public interface IRestaurantUserService {
 

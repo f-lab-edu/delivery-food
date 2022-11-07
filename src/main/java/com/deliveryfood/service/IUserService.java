@@ -1,8 +1,8 @@
 package com.deliveryfood.service;
 
-import com.deliveryfood.model.request.UserRequest;
-import com.deliveryfood.vo.UserRegisterVO;
-import com.deliveryfood.vo.UserUpdateVO;
+import com.deliveryfood.controller.model.request.UserRequest;
+import com.deliveryfood.service.model.UserRegisterVO;
+import com.deliveryfood.service.model.UserUpdateVO;
 
 public interface IUserService {
 

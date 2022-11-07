@@ -1,7 +1,7 @@
 package com.deliveryfood.dao;
 
 import com.deliveryfood.dto.OrderMenuDto;
-import com.deliveryfood.model.OrderMenuInput;
+import com.deliveryfood.controller.model.request.OrderMenuRequest;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ public class OrderMenuDao {
 
     private final SqlSessionTemplate sqlSessionTemplate;
 
-    public OrderMenuInput findOrderMenuById(OrderMenuDto orderMenuDto) {
+    public OrderMenuRequest findOrderMenuById(OrderMenuDto orderMenuDto) {
         return sqlSessionTemplate.selectOne("com.deliveryfood.mapper.OrderMenuMapper.findOrderMenuById", orderMenuDto);
     }
 

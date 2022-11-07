@@ -1,6 +1,6 @@
 package com.deliveryfood.util;
 
-import com.deliveryfood.model.CustomUserDetails;
+import com.deliveryfood.security.CustomUserDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 

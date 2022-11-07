@@ -1,7 +1,7 @@
 package com.deliveryfood.mapper;
 
 import com.deliveryfood.dto.OptionDto;
-import com.deliveryfood.model.OptionInput;
+import com.deliveryfood.controller.model.request.OptionRequest;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,5 +11,5 @@ public interface OptionMapper {
 
     void createOption(OptionDto optionDto);
     void deleteOptionById(OptionDto optionDto);
-    List<OptionInput> findOptionById(OptionDto optionDto);
+    List<OptionRequest> findOptionById(OptionDto optionDto);
 }

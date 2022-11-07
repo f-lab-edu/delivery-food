@@ -1,7 +1,7 @@
 package com.deliveryfood.controller;
 
 import com.deliveryfood.dto.OrderDto;
-import com.deliveryfood.model.OrderInput;
+import com.deliveryfood.controller.model.request.OrderRequest;
 import com.deliveryfood.service.IOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class OrderController {
     @PostMapping("/checkout")
     public void createOrder() {
         // 주문 생성
-        OrderInput order = OrderInput.builder()
+        OrderRequest order = OrderRequest.builder()
                 .orderId(String.valueOf(UUID.randomUUID()))
                 .userId(String.valueOf(UUID.randomUUID()))
                 .state("0")
@@ -36,7 +36,7 @@ public class OrderController {
     @GetMapping("/{orderId}")
     public OrderDto findOrder(@PathVariable String orderId) {
         // 주문 조회
-        OrderInput order = OrderInput.builder()
+        OrderRequest order = OrderRequest.builder()
                 .orderId(orderId)
                 .build();
         return orderService.findOrder(order);
@@ -45,7 +45,7 @@ public class OrderController {
     @GetMapping("/{userId}/orders")
     public List<OrderDto> findOrderById(@PathVariable String userId) {
         // 유저의 모든 주문을 조회한다.
-        OrderInput order = OrderInput.builder()
+        OrderRequest order = OrderRequest.builder()
                 .userId(userId)
                 .build();
         return orderService.findOrderById(order);
@@ -53,11 +53,11 @@ public class OrderController {
 
     @PutMapping("/{orderId}")
     public void modifyOrderById(@PathVariable String orderId
-            , @RequestBody OrderInput orderInput) {
+            , @RequestBody OrderRequest orderRequest) {
         // 주문 수정
-        OrderInput order = OrderInput.builder()
+        OrderRequest order = OrderRequest.builder()
                 .orderId(orderId)
-                .state(orderInput.getState())
+                .state(orderRequest.getState())
                 .build();
         orderService.modifyOrderById(order);
     }

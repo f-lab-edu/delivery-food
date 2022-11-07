@@ -1,6 +1,6 @@
 package com.deliveryfood.common.mock.auth;
 
-import com.deliveryfood.model.CustomUserDetails;
+import com.deliveryfood.security.CustomUserDetails;
 import com.deliveryfood.service.IMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

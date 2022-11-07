@@ -1,11 +1,11 @@
 package com.deliveryfood.controller;
 
 import com.deliveryfood.dto.CartMenuDto;
-import com.deliveryfood.model.request.CartMenuRequest;
-import com.deliveryfood.model.response.CartMenuResponse;
-import com.deliveryfood.service.CartService;
+import com.deliveryfood.controller.model.request.CartMenuRequest;
+import com.deliveryfood.controller.model.response.CartMenuResponse;
+import com.deliveryfood.service.impl.CartService;
 import com.deliveryfood.util.SecurityPrincipal;
-import com.deliveryfood.vo.CartMenuVO;
+import com.deliveryfood.service.model.CartMenuVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

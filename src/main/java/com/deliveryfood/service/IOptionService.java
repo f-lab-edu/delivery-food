@@ -1,13 +1,12 @@
 package com.deliveryfood.service;
 
-import com.deliveryfood.dto.OptionDto;
-import com.deliveryfood.model.OptionInput;
+import com.deliveryfood.controller.model.request.OptionRequest;
 
 import java.util.List;
 
 public interface IOptionService {
 
-    void createOption(OptionInput optionInput);
-    void deleteOptionById(OptionInput optionInput);
-    List<OptionInput> findOptionById(OptionInput optionInput);
+    void createOption(OptionRequest optionRequest);
+    void deleteOptionById(OptionRequest optionRequest);
+    List<OptionRequest> findOptionById(OptionRequest optionRequest);
 }

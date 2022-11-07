@@ -1,12 +1,12 @@
 package com.deliveryfood.controller;
 
-import com.deliveryfood.model.request.RiderRegisterRequest;
-import com.deliveryfood.model.request.RiderUpdateRequest;
-import com.deliveryfood.model.request.UserRequest;
+import com.deliveryfood.controller.model.request.RiderRegisterRequest;
+import com.deliveryfood.controller.model.request.RiderUpdateRequest;
+import com.deliveryfood.controller.model.request.UserRequest;
 import com.deliveryfood.service.IRiderService;
 import com.deliveryfood.util.SecurityPrincipal;
-import com.deliveryfood.vo.RiderRegisterVO;
-import com.deliveryfood.vo.RiderUpdateVO;
+import com.deliveryfood.service.model.RiderRegisterVO;
+import com.deliveryfood.service.model.RiderUpdateVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;

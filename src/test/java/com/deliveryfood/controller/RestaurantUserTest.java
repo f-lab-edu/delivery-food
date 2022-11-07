@@ -1,8 +1,8 @@
 package com.deliveryfood.controller;
 
-import com.deliveryfood.model.request.RestaurantUserRegisterRequest;
-import com.deliveryfood.model.request.UserRequest;
-import com.deliveryfood.service.MemberService;
+import com.deliveryfood.controller.model.request.RestaurantUserRegisterRequest;
+import com.deliveryfood.controller.model.request.UserRequest;
+import com.deliveryfood.service.impl.MemberService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
