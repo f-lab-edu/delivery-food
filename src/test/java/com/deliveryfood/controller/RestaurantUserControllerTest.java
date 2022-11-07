@@ -1,10 +1,8 @@
 package com.deliveryfood.controller;
 
-import com.deliveryfood.common.mock.auth.WithAuthMember;
-import com.deliveryfood.model.request.RestaurantUserRegisterRequest;
-import com.deliveryfood.model.request.UserRequest;
-import com.deliveryfood.service.MemberService;
-import com.deliveryfood.service.RestaurantUserService;
+import com.deliveryfood.controller.model.request.RestaurantUserRegisterRequest;
+import com.deliveryfood.controller.model.request.UserRequest;
+import com.deliveryfood.service.impl.MemberService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,9 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import javax.servlet.Filter;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.logout;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.testSecurityContext;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

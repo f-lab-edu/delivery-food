@@ -1,9 +1,6 @@
 package com.deliveryfood.common.mock.auth;
 
-import com.deliveryfood.model.CustomUserDetails;
-import com.deliveryfood.model.request.RestaurantUserRegisterRequest;
-import com.deliveryfood.model.request.RiderRegisterRequest;
-import com.deliveryfood.model.request.UserRegisterRequest;
+import com.deliveryfood.security.CustomUserDetails;
 import com.deliveryfood.service.IMemberService;
 import com.deliveryfood.service.IRestaurantUserService;
 import com.deliveryfood.service.IRiderService;

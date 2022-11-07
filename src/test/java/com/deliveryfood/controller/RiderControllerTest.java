@@ -1,11 +1,10 @@
 package com.deliveryfood.controller;
 
 import com.deliveryfood.common.mock.auth.WithAuthMember;
-import com.deliveryfood.model.request.RiderRegisterRequest;
-import com.deliveryfood.model.request.RiderUpdateRequest;
-import com.deliveryfood.model.request.UserRequest;
-import com.deliveryfood.service.MemberService;
-import com.deliveryfood.service.RiderService;
+import com.deliveryfood.controller.model.request.RiderRegisterRequest;
+import com.deliveryfood.controller.model.request.RiderUpdateRequest;
+import com.deliveryfood.controller.model.request.UserRequest;
+import com.deliveryfood.service.impl.MemberService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

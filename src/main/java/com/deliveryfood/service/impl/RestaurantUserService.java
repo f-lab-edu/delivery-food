@@ -3,8 +3,10 @@ package com.deliveryfood.service;
 import com.deliveryfood.dao.RestaurantUserDao;
 import com.deliveryfood.dto.MemberDto;
 import com.deliveryfood.dto.RestaurantUserDto;
-import com.deliveryfood.model.request.UserRequest;
-import com.deliveryfood.vo.RestaurantUserRegisterVO;
+import com.deliveryfood.controller.model.request.UserRequest;
+import com.deliveryfood.service.IMemberService;
+import com.deliveryfood.service.IRestaurantUserService;
+import com.deliveryfood.service.model.RestaurantUserRegisterVO;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
