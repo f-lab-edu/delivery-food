@@ -54,7 +54,7 @@ public class MemberDto {
     }
 
     public boolean isExistRole(Role checkRole) {
-        return Arrays.stream(role.split(",")).anyMatch(e -> e.equals(checkRole));
+        return Arrays.stream(role.split(",")).anyMatch(e -> e.equals(checkRole.name()));
     }
 
     public void certificateRole() {
