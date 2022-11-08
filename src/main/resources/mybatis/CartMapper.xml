@@ -28,8 +28,4 @@
         AND idx = #{idx}
     </delete>
 
-    <delete id="deleteAllCart">
-        DELETE FROM CART
-    </delete>
-
 </mapper>

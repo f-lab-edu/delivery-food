@@ -18,5 +18,5 @@ public interface MemberMapper {
 
     void updateMember(MemberDto userDto);
 
-    void deleteAllMember();
+    void deleteMemberByUserId(String userId);
 }

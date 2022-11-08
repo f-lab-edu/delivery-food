@@ -14,5 +14,5 @@ public interface RiderMapper {
 
     void updateStatus(RiderDto riderDto);
 
-    void delteAllRider();
+    void delteRiderByUserId(String userId);
 }

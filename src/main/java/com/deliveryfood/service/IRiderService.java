@@ -13,4 +13,6 @@ public interface IRiderService {
     boolean withdraw(String userId, UserRequest userRequest);
 
     boolean modifyRider(String userId, RiderUpdateVO registerVO);
+
+    void deleteRiderByEmail(String email);
 }

@@ -2,9 +2,8 @@ package com.deliveryfood.controller;
 
 import com.deliveryfood.common.mock.auth.WithAuthMember;
 import com.deliveryfood.dao.CartDao;
-import com.deliveryfood.dao.MemberDao;
-import com.deliveryfood.dao.UserDao;
 import com.deliveryfood.model.request.CartMenuRequest;
+import com.deliveryfood.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,10 +34,7 @@ class CartControllerTest {
     private CartController cartController;
 
     @Autowired
-    private UserDao userDao;
-
-    @Autowired
-    private MemberDao memberDao;
+    private UserService userService;
 
     @Autowired
     private CartDao cartDao;
@@ -54,9 +50,8 @@ class CartControllerTest {
 
     @AfterEach
     public void clear() {
-        memberDao.deleteAllMember();
-        userDao.deleteAllUser();
-        cartDao.deleteAllCart();
+        String userId = userService.deleteUserByEmail("test@gmail.com");
+        cartDao.deleteCart(userId);
     }
 
     @Test

@@ -13,4 +13,6 @@ public interface IUserService {
     boolean withdraw(String userId, UserRequest userRequest);
 
     boolean modifyUser(String userId, UserUpdateVO registerVO);
+
+    String deleteUserByEmail(String email);
 }

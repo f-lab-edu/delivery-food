@@ -1,12 +1,11 @@
 package com.deliveryfood.controller;
 
 import com.deliveryfood.common.mock.auth.WithAuthMember;
-import com.deliveryfood.dao.MemberDao;
-import com.deliveryfood.dao.RiderDao;
 import com.deliveryfood.model.request.RiderRegisterRequest;
 import com.deliveryfood.model.request.RiderUpdateRequest;
 import com.deliveryfood.model.request.UserRequest;
 import com.deliveryfood.service.MemberService;
+import com.deliveryfood.service.RiderService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,10 +38,7 @@ public class RiderControllerTest {
     private RiderController riderController;
 
     @Autowired
-    private RiderDao riderDao;
-
-    @Autowired
-    private MemberDao memberDao;
+    private RiderService riderService;
 
     @BeforeEach
     public void init() {
@@ -55,8 +51,7 @@ public class RiderControllerTest {
 
     @AfterEach
     public void clear() {
-        memberDao.deleteAllMember();
-        riderDao.deleteAllRider();
+        riderService.deleteRiderByEmail("rider@gmail.com");
     }
 
     @Test
@@ -75,7 +70,7 @@ public class RiderControllerTest {
     public void testRegister() throws Exception {
         RiderRegisterRequest registerRequest = RiderRegisterRequest.builder()
                 .name("라이더123")
-                .email("rider123@gmail.com")
+                .email("rider@gmail.com")
                 .password("riderpassword")
                 .phone("010-1234-5678")
                 .commission(3000)

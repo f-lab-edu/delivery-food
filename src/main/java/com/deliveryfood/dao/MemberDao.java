@@ -36,7 +36,7 @@ public class MemberDao {
         sqlSessionTemplate.update("com.deliveryfood.mapper.MemberMapper.updateUser", memberDto);
     }
 
-    public void deleteAllMember() {
-        sqlSessionTemplate.delete("com.deliveryfood.mapper.MemberMapper.deleteAllMember");
+    public void deleteMemberByUserId(String userId) {
+        sqlSessionTemplate.delete("com.deliveryfood.mapper.MemberMapper.deleteMemberByUserId", userId);
     }
 }

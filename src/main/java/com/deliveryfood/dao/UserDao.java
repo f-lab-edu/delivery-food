@@ -24,7 +24,7 @@ public class UserDao {
         sqlSessionTemplate.update("com.deliveryfood.mapper.UserMapper.updateUser", userDto);
     }
 
-    public void deleteAllUser() {
-        sqlSessionTemplate.delete("com.deliveryfood.mapper.UserMapper.deleteAllUser");
+    public void deleteUserByUserId(String userId) {
+        sqlSessionTemplate.delete("com.deliveryfood.mapper.UserMapper.deleteUserByUserId", userId);
     }
 }

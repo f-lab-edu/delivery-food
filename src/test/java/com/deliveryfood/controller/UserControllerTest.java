@@ -1,12 +1,11 @@
 package com.deliveryfood.controller;
 
 import com.deliveryfood.common.mock.auth.WithAuthMember;
-import com.deliveryfood.service.MemberService;
-import com.deliveryfood.dao.MemberDao;
-import com.deliveryfood.dao.UserDao;
 import com.deliveryfood.model.request.UserRegisterRequest;
 import com.deliveryfood.model.request.UserRequest;
 import com.deliveryfood.model.request.UserUpdateRequest;
+import com.deliveryfood.service.MemberService;
+import com.deliveryfood.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,10 +38,7 @@ class UserControllerTest {
     private UserController userController;
 
     @Autowired
-    private UserDao userDao;
-
-    @Autowired
-    private MemberDao memberDao;
+    private UserService userService;
 
     @BeforeEach
     public void init() {
@@ -55,8 +51,7 @@ class UserControllerTest {
 
     @AfterEach
     public void clear() {
-        memberDao.deleteAllMember();
-        userDao.deleteAllUser();
+        userService.deleteUserByEmail("test@gmail.com");
     }
 
     @Test
@@ -74,9 +69,9 @@ class UserControllerTest {
     @DisplayName("회원 가입을 한다")
     public void testRegister() throws Exception {
         UserRegisterRequest registerRequest = UserRegisterRequest.builder()
-                .name("테스트123")
-                .email("test123@gmail.com")
-                .password("testpassword")
+                .name("테스트")
+                .email("test@gmail.com")
+                .password("test1234")
                 .phone("010-1234-5678")
                 .address("서울시 구로구 디지털로")
                 .build();

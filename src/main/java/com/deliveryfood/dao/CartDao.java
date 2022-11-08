@@ -30,11 +30,7 @@ public class CartDao {
     public void deleteMenu(String userId, int index) {
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
-        map.put("index", index);
+        map.put("idx", index);
         sqlSessionTemplate.delete("com.deliveryfood.mapper.CartMapper.deleteMenu", map);
-    }
-
-    public void deleteAllCart() {
-        sqlSessionTemplate.insert("com.deliveryfood.mapper.CartMapper.deleteAllCart");
     }
 }

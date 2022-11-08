@@ -20,7 +20,7 @@ public class RestaurantUserDao {
         return sqlSessionTemplate.selectOne("com.deliveryfood.mapper.RestaurantUserMapper.findByUserId", userId);
     }
 
-    public void deleteAllRestaurantUser() {
-        sqlSessionTemplate.delete("com.deliveryfood.mapper.RestaurantUserMapper.deleteAllRestaurantUser");
+    public void deleteRestaurantUserByUserId(String userId) {
+        sqlSessionTemplate.delete("com.deliveryfood.mapper.RestaurantUserMapper.deleteRestaurantUserByUserId", userId);
     }
 }

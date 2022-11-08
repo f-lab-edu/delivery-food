@@ -11,5 +11,5 @@ public interface RestaurantUserMapper {
 
     UserDto findByUserId(String userId);
 
-    void deleteAllRestaurantUser();
+    void deleteRestaurantUserByUserId(String userId);
 }

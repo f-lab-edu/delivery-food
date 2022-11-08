@@ -18,8 +18,10 @@
         VALUES(#{userId}, #{regDt}, #{udtDt})
     </insert>
 
-    <delete id="deleteAllRestaurantUser">
-        DELETE FROM RESTAURANT_USER
+    <delete id="deleteRestaurantUserByUserId">
+        DELETE
+        FROM RESTAURANT_USER
+        WHERE user_id = #{userId}
     </delete>
 
 </mapper>

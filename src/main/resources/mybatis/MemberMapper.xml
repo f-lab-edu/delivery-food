@@ -48,8 +48,10 @@
         WHERE user_id = #{userId}
     </update>
 
-    <delete id="deleteAllMember">
-        DELETE FROM MEMBER
+    <delete id="deleteMemberByUserId">
+        DELETE
+        FROM MEMBER
+        WHERE user_id = #{userId}
     </delete>
 
 </mapper>

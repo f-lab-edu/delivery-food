@@ -23,6 +23,7 @@ public class MemberService implements IMemberService {
 
     public static final String REGISTER_CODE = "FLAB";
 
+    @Override
     public boolean certification(String userId, String code) {
         if(!code.equals(REGISTER_CODE)) {
             throw new RuntimeException("인증 코드 값이 다름 : " + code);
@@ -38,6 +39,7 @@ public class MemberService implements IMemberService {
         return true;
     }
 
+    @Override
     public boolean register(MemberRegisterVO registerVO, String uuid, MemberDto.Role role) {
         MemberDto findMemberDto = memberDao.findByEmail(registerVO.getEmail());
         if(findMemberDto != null && findMemberDto.isExistRole(role)) {
@@ -63,11 +65,9 @@ public class MemberService implements IMemberService {
         return true;
     }
 
+    @Override
     public boolean withdraw(UserRequest userRequest) {
-        MemberDto memberDto = memberDao.findByEmail(userRequest.getEmail());
-        if(memberDto == null) {
-            throw new UsernameNotFoundException("Member DB에 member가 존재하지 않음 : " + userRequest.getEmail());
-        }
+        MemberDto memberDto = findMemberByEmail(userRequest.getEmail());
 
         if(!BCrypt.checkpw(userRequest.getPassword(), memberDto.getPassword())) {
             throw new BadCredentialsException("비밀번호가 일치하지 않음");
@@ -78,6 +78,7 @@ public class MemberService implements IMemberService {
         return true;
     }
 
+    @Override
     public MemberDto findMemberByEmail(String email) {
         MemberDto memberDto = memberDao.findByEmail(email);
         if(memberDto == null) {
@@ -86,23 +87,32 @@ public class MemberService implements IMemberService {
         return memberDto;
     }
 
-    public boolean modifyUser(UserRegisterVO registerVO) {
-        MemberDto memberDto = memberDao.findByEmail(registerVO.getEmail());
-        if(memberDto == null) {
-            throw new UsernameNotFoundException("Member DB에 member가 존재하지 않음 : " + registerVO.getEmail());
-        }
+    @Override
+    public String getUserId(String email) {
+        MemberDto memberDto = findMemberByEmail(email);
+        return memberDto.getUserId();
+    }
 
+    @Override
+    public boolean modifyUser(UserRegisterVO registerVO) {
+        MemberDto memberDto = findMemberByEmail(registerVO.getEmail());
         memberDto.setPhone(registerVO.getPhone());
         memberDao.updateMember(memberDto);
         return true;
     }
 
     @Override
-    public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MemberDto memberDto = memberDao.findByEmail(username);
+    public void deleteMemberByUserId(String userId) {
+        MemberDto memberDto = memberDao.findByUserId(userId);
         if(memberDto == null) {
-            throw new UsernameNotFoundException("Member DB에 member가 존재하지 않음 : " + username);
+            throw new UsernameNotFoundException("Member DB에 member가 존재하지 않음 : " + userId);
         }
+        memberDao.deleteMemberByUserId(userId);
+    }
+
+    @Override
+    public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        MemberDto memberDto = findMemberByEmail(username);
 
         CustomUserDetails userDetails = CustomUserDetails.builder()
                 .userId(memberDto.getUserId())

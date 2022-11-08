@@ -83,4 +83,14 @@ public class UserService implements IUserService {
         userDao.updateUser(userDto);
         return true;
     }
+
+    @Override
+    public String deleteUserByEmail(String email) {
+        String userId = memberService.getUserId(email);
+
+        memberService.deleteMemberByUserId(userId);
+        userDao.deleteUserByUserId(userId);
+
+        return userId;
+    }
 }

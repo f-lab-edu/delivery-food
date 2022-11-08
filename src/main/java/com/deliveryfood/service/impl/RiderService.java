@@ -79,4 +79,12 @@ public class RiderService implements IRiderService {
         riderDao.updateRider(riderDto);
         return true;
     }
+
+    @Override
+    public void deleteRiderByEmail(String email) {
+        String userId = memberService.getUserId(email);
+
+        memberService.deleteMemberByUserId(userId);
+        riderDao.deleteRiderByUserId(userId);
+    }
 }
