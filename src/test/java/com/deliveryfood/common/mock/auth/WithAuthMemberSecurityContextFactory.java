@@ -37,31 +37,11 @@ public class WithAuthMemberSecurityContextFactory implements WithSecurityContext
         String authority = annotation.authority();
 
         if(authority.contains("ROLE_USER")) {
-            UserRegisterRequest registerRequest = UserRegisterRequest.builder()
-                    .name(username)
-                    .email(username)
-                    .password(password)
-                    .phone("010-1234-5678")
-                    .address("서울시 구로구 디지털로")
-                    .build();
-            userService.register(UserRegisterVO.convert(registerRequest));
+            registerUser(username, password);
         } else if(authority.contains("ROLE_RIDER")) {
-            RiderRegisterRequest registerRequest = RiderRegisterRequest.builder()
-                    .name(username)
-                    .email(username)
-                    .password(password)
-                    .phone("010-1234-5678")
-                    .commission(3000)
-                    .build();
-            riderService.register(RiderRegisterVO.convert(registerRequest));
+            registerRider(username, password);
         } else if(authority.contains("ROLE_RESTAURANT")) {
-            RestaurantUserRegisterRequest registerRequest = RestaurantUserRegisterRequest.builder()
-                    .name(username)
-                    .email(username)
-                    .password(password)
-                    .phone("010-1234-5678")
-                    .build();
-            restaurantUserService.register(RestaurantUserRegisterVO.convert(registerRequest));
+            registerRestaurant(username, password);
         }
 
         CustomUserDetails user = (CustomUserDetails) memberService.loadUserByUsername(username);
@@ -80,5 +60,37 @@ public class WithAuthMemberSecurityContextFactory implements WithSecurityContext
             authorityList.add(new SimpleGrantedAuthority(role));
         }
         return authorityList;
+    }
+
+    private void registerUser(String username, String password) {
+        UserRegisterRequest registerRequest = UserRegisterRequest.builder()
+                .name(username)
+                .email(username)
+                .password(password)
+                .phone("010-1234-5678")
+                .address("서울시 구로구 디지털로")
+                .build();
+        userService.register(UserRegisterVO.convert(registerRequest));
+    }
+
+    private void registerRider(String username, String password) {
+        RiderRegisterRequest registerRequest = RiderRegisterRequest.builder()
+                .name(username)
+                .email(username)
+                .password(password)
+                .phone("010-1234-5678")
+                .commission(3000)
+                .build();
+        riderService.register(RiderRegisterVO.convert(registerRequest));
+    }
+
+    private void registerRestaurant(String username, String password) {
+        RestaurantUserRegisterRequest registerRequest = RestaurantUserRegisterRequest.builder()
+                .name(username)
+                .email(username)
+                .password(password)
+                .phone("010-1234-5678")
+                .build();
+        restaurantUserService.register(RestaurantUserRegisterVO.convert(registerRequest));
     }
 }
