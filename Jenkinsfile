@@ -52,6 +52,37 @@ pipeline {
                 )
             }
         }
+
+        stage('Deploy') {
+            steps([$class: 'BapSshPromotionPublisherPlugin']) {
+                sshPublisher(
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: 'cd-server',
+                            transfers: [
+                                sshTransfer(
+                                    cleanRemote: false,
+                                    excludes: '',
+                                    execCommand: 'sh /root/deploy/run.sh',
+                                    execTimeout: 120000,
+                                    flatten: false,
+                                    makeEmptyDirs: false,
+                                    noDefaultExcludes: false,
+                                    patternSeparator: '[, ]+',
+                                    remoteDirectory: '/deploy',
+                                    remoteDirectorySDF: false,
+                                    removePrefix: 'build/libs',
+                                    sourceFiles: 'build/libs/*jar'
+                                )
+                            ],
+                            usePromotionTimestamp: false,
+                            useWorkspaceInPromotion: false,
+                            verbose: true
+                        )
+                    ]
+                )
+            }
+        }
     }
 
     post {
