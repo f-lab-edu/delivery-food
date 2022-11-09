@@ -54,7 +54,7 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps([$class: 'BapSshPromotionPublisherPlugin']) {
+            steps {
                 sshPublisher(
                     publishers: [
                         sshPublisherDesc(
