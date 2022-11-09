@@ -6,48 +6,49 @@ pipeline {
     	TEAM_DOMAIN = 'delivery-foodhq'
     	TOKEN_CREDENTIAL_ID = 'haenlee-slack'
 
-    stages {
+        stages {
 
-        stage('Git Checkout') {
-            steps {
-                checkout scm
-                echo 'git checkout success'
+            stage('Git Checkout') {
+                steps {
+                    checkout scm
+                    echo 'git checkout success'
+                }
             }
-        }
 
-        stage('Build') {
-            steps {
-                sh 'gradle clean build --exclude-task test'
-                echo 'build success'
+            stage('Build') {
+                steps {
+                    sh 'gradle clean build --exclude-task test'
+                    echo 'build success'
+                }
             }
-        }
 
-        stage('Test') {
-            steps {
-                sh 'gradle test'
-                echo 'test success'
+            stage('Test') {
+                steps {
+                    sh 'gradle test'
+                    echo 'test success'
+                }
             }
-        }
 
-        stage('Deploy') {
-            steps([$class: 'BapSshPromotionPublisherPlugin']) {
-                sshPublisher(
-                    continueOnError: false, failOnError: true,
-                    publishers: [
-                        sshPublisherDesc(
-                        configName: "cd-server",
-                            verbose: true,
-                            transfers: [
-                                sshTransfer(
-                                    sourceFiles: "build/libs/*jar",
-                                    removePrefix: "build/libs",
-                                    remoteDirectory: "/deploy",
-                                    execCommand: "sh /root/deploy/run.sh"
-                                )
-                            ]
-                        )
-                    ]
-                )
+            stage('Deploy') {
+                steps([$class: 'BapSshPromotionPublisherPlugin']) {
+                    sshPublisher(
+                        continueOnError: false, failOnError: true,
+                        publishers: [
+                            sshPublisherDesc(
+                            configName: "cd-server",
+                                verbose: true,
+                                transfers: [
+                                    sshTransfer(
+                                        sourceFiles: "build/libs/*jar",
+                                        removePrefix: "build/libs",
+                                        remoteDirectory: "/deploy",
+                                        execCommand: "sh /root/deploy/run.sh"
+                                    )
+                                ]
+                            )
+                        ]
+                    )
+                }
             }
         }
     }
