@@ -31,29 +31,6 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps([$class: 'BapSshPromotionPublisherPlugin']) {
-                sshPublisher(
-                    continueOnError: false, failOnError: true,
-                    publishers: [
-                        sshPublisherDesc(
-                        configName: "cd-server",
-                            verbose: true,
-                            transfers: [
-                                sshTransfer(
-                                    sourceFiles: "build/libs/delivery-food-0.0.1-SNAPSHOT.jar",
-                                    removePrefix: "build/libs",
-                                    remoteDirectory: "/deploy",
-                                    execCommand: "sh /root/deploy/run.sh"
-                                )
-                            ],
-                            verbose: true
-                        )
-                    ]
-                )
-            }
-        }
-
-        stage('Deploy') {
             steps {
                 sshPublisher(
                     publishers: [
