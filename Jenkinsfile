@@ -40,7 +40,7 @@ pipeline {
                             verbose: true,
                             transfers: [
                                 sshTransfer(
-                                    sourceFiles: "build/libs/*jar",
+                                    sourceFiles: "build/libs/delivery-food-0.0.1-SNAPSHOT.jar",
                                     removePrefix: "build/libs",
                                     remoteDirectory: "/deploy",
                                     execCommand: "sh /root/deploy/run.sh"
