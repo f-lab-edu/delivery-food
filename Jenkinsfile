@@ -45,7 +45,8 @@ pipeline {
                                     remoteDirectory: "/deploy",
                                     execCommand: "sh /root/deploy/run.sh"
                                 )
-                            ]
+                            ],
+                            verbose: true
                         )
                     ]
                 )
