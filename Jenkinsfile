@@ -23,6 +23,13 @@ pipeline {
             }
         }
 
+        #stage('Test') {
+        #    steps {
+        #        sh 'gradle test'
+        #        echo 'test success'
+        #    }
+        #}
+
         stage('Deploy') {
             steps {
                 sshPublisher(
