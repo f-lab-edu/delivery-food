@@ -1,13 +1,16 @@
 package com.deliveryfood.common.mock.auth;
 
+import com.deliveryfood.controller.model.request.RestaurantUserRegisterRequest;
+import com.deliveryfood.controller.model.request.RiderRegisterRequest;
+import com.deliveryfood.controller.model.request.UserRegisterRequest;
 import com.deliveryfood.security.CustomUserDetails;
 import com.deliveryfood.service.IMemberService;
 import com.deliveryfood.service.IRestaurantUserService;
 import com.deliveryfood.service.IRiderService;
 import com.deliveryfood.service.IUserService;
-import com.deliveryfood.vo.RestaurantUserRegisterVO;
-import com.deliveryfood.vo.RiderRegisterVO;
-import com.deliveryfood.vo.UserRegisterVO;
+import com.deliveryfood.service.model.RestaurantUserRegisterVO;
+import com.deliveryfood.service.model.RiderRegisterVO;
+import com.deliveryfood.service.model.UserRegisterVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

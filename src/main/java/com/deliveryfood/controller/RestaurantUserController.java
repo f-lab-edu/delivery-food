@@ -1,10 +1,10 @@
 package com.deliveryfood.controller;
 
-import com.deliveryfood.security.CustomUserDetails;
 import com.deliveryfood.controller.model.request.RestaurantUserRegisterRequest;
 import com.deliveryfood.controller.model.request.UserRequest;
 import com.deliveryfood.service.IRestaurantUserService;
 import com.deliveryfood.service.model.RestaurantUserRegisterVO;
+import com.deliveryfood.util.SecurityPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

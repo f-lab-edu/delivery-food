@@ -5,6 +5,7 @@ import com.deliveryfood.controller.model.request.UserRegisterRequest;
 import com.deliveryfood.controller.model.request.UserRequest;
 import com.deliveryfood.controller.model.request.UserUpdateRequest;
 import com.deliveryfood.service.impl.MemberService;
+import com.deliveryfood.service.impl.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
