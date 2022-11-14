@@ -21,8 +21,8 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(
         basePackages = {"com.deliveryfood.mapper"},
-        sqlSessionFactoryRef = "sqlSessionFactory",
-        sqlSessionTemplateRef = "sqlSession"
+        sqlSessionFactoryRef = "sqlSessionFactory"
+//        sqlSessionTemplateRef = "sqlSession"
 )
 @RequiredArgsConstructor
 @EnableTransactionManagement
