@@ -1,5 +1,6 @@
 package com.deliveryfood.controller.model.request;
 
+import com.deliveryfood.dto.RestaurantDto.FoodCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,10 +13,10 @@ import lombok.NoArgsConstructor;
 public class RestaurantRegisterRequest {
 
     private String name;
-    private String email;
-    private String password;
+    private Integer businessId;
+    private FoodCategory foodCategory;
+    private String address;
     private String phone;
-    private String restaurantId;
-    private String userId;
-    private String state;
+    private String openingHours;
+    private Integer distance;
 }
