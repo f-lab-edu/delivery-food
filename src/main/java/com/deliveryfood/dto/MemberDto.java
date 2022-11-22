@@ -18,7 +18,7 @@ public class MemberDto {
     public enum Status {
         NONE,
         REGISTER,
-        WITHDRAW;
+        WITHDRAW
     }
 
     public enum Role {
