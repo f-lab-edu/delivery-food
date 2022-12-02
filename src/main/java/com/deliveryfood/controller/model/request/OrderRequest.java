@@ -14,5 +14,4 @@ public class OrderRequest {
     private String orderId;
     private String userId;
     private String state;
-    //TODO : 나머지 필드도 추가 예정
 }
