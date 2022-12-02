@@ -3,19 +3,18 @@ package com.deliveryfood.controller;
 import com.deliveryfood.controller.model.request.MenuRequest;
 import com.deliveryfood.controller.model.request.RestaurantMenuOptionRequest;
 import com.deliveryfood.controller.model.request.RestaurantRegisterRequest;
-import com.deliveryfood.dto.MenuDto;
-import com.deliveryfood.dto.OptionDto;
-import com.deliveryfood.dto.RestaurantDto;
-import com.deliveryfood.dto.SubOptionDto;
+import com.deliveryfood.controller.model.request.SubOptionRequest;
 import com.deliveryfood.service.IMenuService;
 import com.deliveryfood.service.IOptionService;
 import com.deliveryfood.service.IRestaurantService;
 import com.deliveryfood.service.ISubOptionService;
 import com.deliveryfood.service.model.MenuRegisterVO;
 import com.deliveryfood.service.model.MenuVO;
+import com.deliveryfood.service.model.OptionVO;
 import com.deliveryfood.service.model.RestaurantMenuOptionVO;
 import com.deliveryfood.service.model.RestaurantMenuSubOptionVO;
 import com.deliveryfood.service.model.RestaurantRegisterVO;
+import com.deliveryfood.service.model.SubOptionVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.ObjectUtils;
@@ -44,10 +43,16 @@ public class RestaurantController {
     private final ISubOptionService subOptionService;
 
     @GetMapping("/{restaurantId}")
-    public RestaurantDto findUserById(@PathVariable String restaurantId
+    public RestaurantRegisterRequest findUserById(@PathVariable String restaurantId
             , @RequestBody RestaurantRegisterRequest restaurantRegisterRequest) {
         // 레스토랑 회원 조회
-        return restaurantService.findUserById(RestaurantRegisterVO.convert(restaurantRegisterRequest));
+        RestaurantRegisterVO restaurantRegisterOutput = restaurantService.findUserById(RestaurantRegisterVO.convert(restaurantRegisterRequest));
+
+        return RestaurantRegisterRequest.builder()
+                .restaurantId(restaurantRegisterOutput.getRestaurantId())
+                .userId(restaurantRegisterOutput.getUserId())
+                .state(restaurantRegisterOutput.getState())
+                .build();
     }
 
     @PostMapping("/{restaurantId}/menus")
@@ -58,10 +63,22 @@ public class RestaurantController {
     }
 
     @GetMapping("/{restaurantId}/menus")
-    public List<MenuDto> findMenuById(@PathVariable String restaurantId
+    public List<MenuRequest> findMenuById(@PathVariable String restaurantId
             , @RequestBody MenuRequest menuRequest) {
         // 해당 레스토랑의 메뉴들을 조회한다.
-        return menuService.findMenuById(MenuVO.convert(menuRequest.getMenuId(), menuRequest));
+        List<MenuVO> menuOutputList = menuService.findMenuById(MenuVO.convert(menuRequest.getMenuId(), menuRequest));
+
+        List<MenuRequest> MenuResponseList = new ArrayList<>();
+        for (MenuVO menuOutput : menuOutputList) {
+            MenuResponseList.add(MenuRequest.builder()
+                    .menuId(menuOutput.getMenuId())
+                    .restaurantId(menuOutput.getRestaurantId())
+                    .name(menuOutput.getName())
+                    .state(menuOutput.getState())
+                    .build());
+        }
+
+        return MenuResponseList;
     }
 
     @PutMapping("/{restaurantId}/menus/{menuId}")
@@ -73,23 +90,33 @@ public class RestaurantController {
     }
 
     @GetMapping("/{restaurantId}/menus/{menuId}")
-    public List<SubOptionDto> findSubOptions(@PathVariable String menuId
+    public List<SubOptionRequest> findSubOptions(@PathVariable String menuId
             , @RequestBody RestaurantMenuOptionRequest restaurantMenuOptionRequest) {
         // 해당 메뉴의 하위옵션들을 조회한다.
-        List<OptionDto> optionDtos = optionService.findOptionById(RestaurantMenuOptionVO.convert(restaurantMenuOptionRequest));
-        List<SubOptionDto> subOptionDtos = new ArrayList<>();
-        for (OptionDto option : optionDtos) {
-            subOptionDtos.addAll(subOptionService.findSubOptionById(RestaurantMenuSubOptionVO.convert(option.getMenuId(), option.getOptionId())));
+        List<OptionVO> optionOutputList = optionService.findOptionById(RestaurantMenuOptionVO.convert(restaurantMenuOptionRequest));
+
+        List<SubOptionVO> subOptionOutputList = new ArrayList<>();
+        for (OptionVO optionOutput : optionOutputList) {
+            subOptionOutputList.addAll(subOptionService.findSubOptionById(RestaurantMenuSubOptionVO.convert(optionOutput.getMenuId(), optionOutput.getOptionId())));
         }
 
-        if (ObjectUtils.isEmpty(subOptionDtos)) {
+        if (ObjectUtils.isEmpty(subOptionOutputList)) {
             log.warn("subOptions 테이블 조회결과 없음");
             return Collections.emptyList();
         }
 
-        log.info(String.format("subOptions 테이블 조회성공. 조회결과 count=[{%s}]", subOptionDtos.size()));
+        List<SubOptionRequest> subOptionResponseList = new ArrayList<>();
+        for (SubOptionVO subOptionOutput : subOptionOutputList) {
+            subOptionResponseList.add(SubOptionRequest.builder()
+                    .menuId(subOptionOutput.getMenuId())
+                    .optionId(subOptionOutput.getOptionId())
+                    .subOptionId(subOptionOutput.getSubOptionId())
+                    .name(subOptionOutput.getName())
+                    .price(subOptionOutput.getPrice())
+                    .build());
+        }
+        log.info(String.format("subOptions 테이블 조회성공. 조회결과 count=[{%s}]", subOptionResponseList.size()));
 
-        return subOptionDtos;
+        return subOptionResponseList;
     }
-
 }

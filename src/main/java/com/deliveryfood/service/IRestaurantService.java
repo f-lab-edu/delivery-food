@@ -1,6 +1,5 @@
 package com.deliveryfood.service;
 
-import com.deliveryfood.dto.RestaurantDto;
 import com.deliveryfood.service.model.RestaurantRegisterVO;
 
 public interface IRestaurantService {
@@ -9,5 +8,5 @@ public interface IRestaurantService {
 
     void deleteByRestaurantId(String restaurantId);
 
-    RestaurantDto findUserById(RestaurantRegisterVO restaurantRegisterVO);
+    RestaurantRegisterVO findUserById(RestaurantRegisterVO restaurantRegisterVO);
 }

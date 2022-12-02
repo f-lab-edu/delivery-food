@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -38,13 +39,26 @@ public class SubOptionService implements ISubOptionService {
     }
 
     @Override
-    public List<SubOptionDto> findSubOptionById(SubOptionVO subOptionVO) {
-        log.debug("findSubOptionById 서비스 호출");
+    public List<SubOptionVO> findSubOptionById(SubOptionVO subOptionVO) {
+        log.trace("findSubOptionById 서비스 호출");
         SubOptionDto subOptionDto = SubOptionDto.builder()
                 .optionId(subOptionVO.getOptionId())
                 .menuId(subOptionVO.getMenuId())
                 .build();
-        return subOptionDao.findSubOptionById(subOptionDto);
+        List<SubOptionDto> subOptionDtoOutputList = subOptionDao.findSubOptionById(subOptionDto);
+
+        List<SubOptionVO> subOptionOutputList = new ArrayList<>();
+        for (SubOptionDto subOptionDtoOutput : subOptionDtoOutputList) {
+            subOptionOutputList.add(SubOptionVO.builder()
+                    .menuId(subOptionDtoOutput.getMenuId())
+                    .optionId(subOptionDtoOutput.getOptionId())
+                    .subOptionId(subOptionDtoOutput.getSubOptionId())
+                    .name(subOptionDtoOutput.getName())
+                    .price(subOptionDtoOutput.getPrice())
+                    .build());
+        }
+
+        return subOptionOutputList;
     }
 
 }

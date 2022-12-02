@@ -34,18 +34,22 @@ public class RestaurantService implements IRestaurantService {
     }
 
     @Override
-    public RestaurantDto findUserById(RestaurantRegisterVO restaurantRegisterVO) {
+    public RestaurantRegisterVO findUserById(RestaurantRegisterVO restaurantRegisterVO) {
         RestaurantDto restaurantDto = RestaurantDto.builder()
                 .restaurantId(restaurantRegisterVO.getRestaurantId())
                 .userId(restaurantRegisterVO.getUserId())
                 .build();
-        RestaurantDto restaurant = restaurantDao.findUserById(restaurantDto);
+        RestaurantDto restaurantOutput = restaurantDao.findUserById(restaurantDto);
 
-        if(ObjectUtils.isEmpty(restaurant)) {
+        if(ObjectUtils.isEmpty(restaurantOutput)) {
             throw new NullPointerException("가게가 존재하지 않음 : " + restaurantDto.getRestaurantId());
         }
 
-        return restaurant;
+        return RestaurantRegisterVO.builder()
+                .restaurantId(restaurantOutput.getRestaurantId())
+                .userId(restaurantOutput.getUserId())
+                .state(restaurantOutput.getState())
+                .build();
     }
 
 
