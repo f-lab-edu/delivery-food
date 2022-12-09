@@ -8,6 +8,7 @@ import com.deliveryfood.service.model.MenuVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -27,11 +28,24 @@ public class MenuService implements IMenuService {
     }
 
     @Override
-    public List<MenuDto> findMenuById(MenuVO menuVO) {
+    public List<MenuVO> findMenuById(MenuVO menuVO) {
         MenuDto menuDto = MenuDto.builder()
                 .restaurantId(menuVO.getRestaurantId())
                 .build();
-        return menuDao.findMenuById(menuDto);
+
+        List<MenuDto> menuDtoOutputList = menuDao.findMenuById(menuDto);
+
+        List<MenuVO> menuOutputList = new ArrayList<>();
+        for (MenuDto menuDtoOutput : menuDtoOutputList) {
+            menuOutputList.add(MenuVO.builder()
+                    .menuId(menuDtoOutput.getMenuId())
+                    .restaurantId(menuDtoOutput.getRestaurantId())
+                    .name(menuDtoOutput.getName())
+                    .state(menuDtoOutput.getState())
+                    .build());
+        }
+
+        return menuOutputList;
     }
 
     @Override

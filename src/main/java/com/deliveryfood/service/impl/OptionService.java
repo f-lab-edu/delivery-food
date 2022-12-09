@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -38,11 +39,23 @@ public class OptionService implements IOptionService {
     }
 
     @Override
-    public List<OptionDto> findOptionById(OptionVO optionVO) {
+    public List<OptionVO> findOptionById(OptionVO optionVO) {
         log.trace("findOptionById 서비스 호출");
         OptionDto optionDto = OptionDto.builder()
                 .menuId(optionVO.getMenuId())
                 .build();
-        return optionDao.findOptionById(optionDto);
+        List<OptionDto> optionDtoOutputList = optionDao.findOptionById(optionDto);
+
+        List<OptionVO> optionOutputList = new ArrayList<>();
+        for (OptionDto optionDtoOutput : optionDtoOutputList) {
+            optionOutputList.add(OptionVO.builder()
+                    .optionId(optionDtoOutput.getOptionId())
+                    .menuId(optionDtoOutput.getMenuId())
+                    .name(optionDtoOutput.getName())
+                    .state(optionDtoOutput.getState())
+                    .build());
+        }
+
+        return optionOutputList;
     }
 }
